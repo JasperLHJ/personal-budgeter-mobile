@@ -58,7 +58,8 @@ export function subscribe(fn: () => void) {
 /** Load from IndexedDB (seeding when empty). Call once at startup, before rendering. */
 export async function loadDb(): Promise<void> {
   try {
-    await navigator.storage?.persist?.();
+    // Never block startup on the persistence request (it can stay pending, e.g. in headless/Firefox).
+    void navigator.storage?.persist?.();
   } catch {
     /* best effort */
   }
