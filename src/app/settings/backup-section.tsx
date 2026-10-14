@@ -13,7 +13,7 @@ export function BackupSection() {
     a.href = url;
     a.download = backupFileName();
     a.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => URL.revokeObjectURL(url), 1000); // immediate revoke can cancel the download on Android
   };
 
   const pick = async (file: File | undefined) => {
