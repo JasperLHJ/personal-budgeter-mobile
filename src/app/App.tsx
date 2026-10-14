@@ -17,16 +17,19 @@ export default function App({ startLocked }: { startLocked: boolean }) {
     return () => document.removeEventListener("visibilitychange", onHide);
   }, []);
 
-  if (locked) return <LockScreen onUnlock={() => setLocked(false)} />;
+  // Overlay instead of unmounting: an in-flight action (e.g. Import's file picker hides the page) must survive the lock.
   return (
     <>
-      <TabBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/spending" element={<SpendingPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      {locked && <LockScreen onUnlock={() => setLocked(false)} />}
+      <div className="contents" inert={locked}>
+        <TabBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/spending" element={<SpendingPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
     </>
   );
 }
