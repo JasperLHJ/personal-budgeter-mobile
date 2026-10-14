@@ -20,3 +20,7 @@ Open the deployed URL in Chrome, then menu (three dots) -> **Install app** (or *
 ## Backup warning
 
 Your data lives only on the phone. Clearing site data, uninstalling the app or losing the phone erases it. Use **Settings -> Backup -> Export** regularly and keep the file somewhere safe; **Import** restores it (replacing everything).
+
+## PIN lock
+
+**Settings -> PIN lock** optionally asks for a 4-8 digit PIN when the app opens or returns from the background. It is a UI lock against casual access to an unlocked phone, not encryption: data is stored as before. The PIN is kept (salted and hashed) separately from your data, so backups never include it. If you forget it, **Forgot PIN?** on the lock screen erases all data and removes the PIN, so export backups regularly.

@@ -4,6 +4,7 @@ import { listCatalog, listRecurringItems } from "@/lib/db";
 import { useDb } from "@/lib/use-db";
 import { BackupSection } from "./backup-section";
 import { CatalogSection } from "./catalog-section";
+import { PinSection } from "./pin-section";
 import { RecurringSection } from "./recurring-section";
 
 function Recurring() {
@@ -32,6 +33,7 @@ export default function SettingsPage() {
       <Suspense fallback={<p className="text-muted">Loading…</p>}>
         <Catalogs />
       </Suspense>
+      <PinSection />
       <BackupSection />
     </main>
   );

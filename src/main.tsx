@@ -3,13 +3,15 @@ import { HashRouter } from "react-router";
 import "./index.css";
 import App from "./app/App";
 import { loadDb } from "./lib/db";
+import { hasPin } from "./lib/pin";
 
 const root = createRoot(document.getElementById("root")!);
 try {
   await loadDb();
+  const locked = await hasPin();
   root.render(
     <HashRouter>
-      <App />
+      <App startLocked={locked} />
     </HashRouter>,
   );
 } catch (e) {

@@ -93,6 +93,9 @@ export function mutate<T>(fn: (draft: DbState) => T): Promise<T> {
 /** Replace the whole database (backup import). Caller must have validated `next`. */
 export const replaceAll = (next: DbState) => mutate((d) => void Object.assign(d, structuredClone(next)));
 
+/** Erase everything back to the fresh seeded state ("Forgot PIN?"). */
+export const resetDb = () => mutate((d) => void Object.assign(d, seed()));
+
 const nextId = (rows: { id: number }[]) => rows.reduce((m, r) => Math.max(m, r.id), 0) + 1;
 const nowIso = () => new Date().toISOString();
 
